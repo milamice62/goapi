@@ -2,8 +2,14 @@ pipeline {
     agent any
     stages {
         stage("Unit Test") {
+            agent {
+                docker {
+                    image 'golang:latest'
+                }
+            }
             steps {
                 echo "Unit Test Stage"
+                sh "go version"
             }
         }
         stage("Docker Build") {
