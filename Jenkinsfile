@@ -9,7 +9,6 @@ pipeline {
             }
             steps {
                 echo "Unit Test Stage"
-                sh "go version"
             }
         }
         stage("Docker Build") {
