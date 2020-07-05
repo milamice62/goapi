@@ -2,16 +2,17 @@ package db
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func ClientInit() (*mongo.Client, error) {
+func ClientInit() *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
-		return nil, err
+		log.Fatalf("err: %v", err)
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -19,8 +20,8 @@ func ClientInit() (*mongo.Client, error) {
 
 	err = client.Connect(ctx)
 	if err != nil {
-		return nil, err
+		log.Fatalf("err: %v", err)
 	}
 
-	return client, nil
+	return client
 }

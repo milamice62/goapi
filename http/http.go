@@ -5,6 +5,9 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	route "github.com/milamice62/fakeapi/api/routes"
 )
 
 func HttpServer() {
@@ -15,10 +18,9 @@ func HttpServer() {
 }
 
 func handler() http.Handler {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/double", doubleHandler)
-	mux.HandleFunc("/triple", tripleHandler)
-	return mux
+	r := mux.NewRouter()
+	route.Genres(r)
+	return r
 }
 
 func doubleHandler(res http.ResponseWriter, req *http.Request) {
