@@ -20,6 +20,7 @@ func HttpServer() {
 func handler() http.Handler {
 	r := mux.NewRouter()
 	route.Genres(r)
+	route.Movies(r)
 	return r
 }
 
